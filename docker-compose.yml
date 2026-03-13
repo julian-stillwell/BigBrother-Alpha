@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bigbrother
+      POSTGRES_PASSWORD: bigbrother
+      POSTGRES_DB: bigbrother
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bigbrother"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://bigbrother:bigbrother@postgres:5432/bigbrother
+      PORT: "3000"
+      LOG_LEVEL: info
+      SANDBOX_IMAGE_NAME: bigbrother-sandbox
+      SANDBOX_TIMEOUT_MS: "300000"
+      MAX_UPLOAD_SIZE_MB: "500"
+      ARTIFACT_STORAGE_PATH: /app/storage/artifacts
+    volumes:
+      - ./storage:/app/storage
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  sandbox:
+    build:
+      context: ./sandbox
+      dockerfile: Dockerfile.sandbox
+    image: bigbrother-sandbox
+    profiles:
+      - build-only
+
+volumes:
+  pgdata:
