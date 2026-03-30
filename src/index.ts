@@ -9,6 +9,9 @@ import { AppError } from './errors';
 import { registerRoutes } from './routes';
 
 async function main() {
+  // NOTE: keep main for backwards compatibility when running as standalone service.
+  // The agent engine is now exposed via src/agent and can be used programmatically.
+
   const app = Fastify({
     logger: {
       level: config.LOG_LEVEL,

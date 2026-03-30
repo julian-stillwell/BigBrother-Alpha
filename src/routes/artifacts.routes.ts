@@ -1,7 +1,8 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import * as artifactService from '../services/artifact.service';
 
-export async function registerArtifactRoutes(app: FastifyInstance): Promise<void> {
+// export async function registerArtifactRoutes(app: FastifyInstance): Promise<void> {
+export async function _archive_registerArtifactRoutes(app: FastifyInstance): Promise<void> {
   /**
    * GET /api/v1/artifacts/:id
    * Get artifact metadata

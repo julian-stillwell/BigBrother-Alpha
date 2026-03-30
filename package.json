@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Docker-based software testing sandbox with before/after metrics",
   "main": "dist/index.js",
+  "exports": {
+    "./agent": "./dist/agent/index.js"
+  },
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",

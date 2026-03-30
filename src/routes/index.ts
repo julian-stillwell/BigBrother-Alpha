@@ -4,7 +4,8 @@ import { registerArtifactRoutes } from './artifacts.routes';
 import { prisma } from '../lib/prisma';
 import { docker } from '../lib/docker';
 
-export async function registerRoutes(app: FastifyInstance): Promise<void> {
+// export async function registerRoutes(app: FastifyInstance): Promise<void> {
+export async function _archive_registerRoutes(app: FastifyInstance): Promise<void> {
   // Health check with Docker + DB connectivity
   app.get('/api/v1/health', async (_request, reply) => {
     let dbStatus = 'disconnected';

@@ -8,7 +8,8 @@ import * as installerService from '../services/installer.service';
 import * as orchestratorService from '../services/orchestrator.service';
 import { CreateTestRunFields } from '../types/api';
 
-export async function registerTestRunRoutes(app: FastifyInstance): Promise<void> {
+// export async function registerTestRunRoutes(app: FastifyInstance): Promise<void> {
+export async function _archive_registerTestRunRoutes(app: FastifyInstance): Promise<void> {
   /**
    * POST /api/v1/test-runs
    * Upload a .exe and start a sandboxed test run
